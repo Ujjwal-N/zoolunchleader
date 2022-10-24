@@ -1,0 +1,24 @@
+syntax = "proto3";
+package edu.sjsu.cs185c.zooleader;
+service ZooLunch {
+   // request an audit of the last or current lunch situation
+   rpc audit(AuditRequest) returns (AuditResponse) {}
+   // skip the next readyforlunch announcement
+   rpc skipLunch(SkipRequest) returns (SkipResponse) {}
+   // exit your process right away
+   rpc exitZoo(ExitRequest) returns (ExitResponse) {}
+}
+
+message AuditRequest {}
+
+// the Audit Response is always about the current lunch or last lunch if no lunch is getting ready
+message AuditResponse {
+   int64 lunchZxid = 1; // the zxid of the current or last lunch (if no lunch is active)
+   string leader = 2;
+   repeated string attendees = 3; // this is set only if you are/were the leader
+}
+
+message SkipRequest {}
+message SkipResponse {}
+message ExitRequest {}
+message ExitResponse {}
