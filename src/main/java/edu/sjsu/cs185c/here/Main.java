@@ -330,7 +330,7 @@ public class Main {
 
             } else if (event.getType() == Watcher.Event.EventType.NodeDeleted) {
                 if (CurrentState.singleton.readyForLunch()) {
-                    FightForLeader.singleton.start(); // will re add this watch
+                    FightForLeader.singleton.start(); // watch automatically re added in thread
                 }
             }
 
@@ -393,6 +393,7 @@ public class Main {
 
     }
 
+    // TODO: Implement RPC and test ):
     public static void main(String[] args) {
         execObj = new Cli();
         System.exit(new CommandLine(execObj).execute(args));
